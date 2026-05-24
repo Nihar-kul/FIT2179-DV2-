@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Australia's International Student Story</title>
+  <title>Australia's International Student Story — A Data Investigation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Source+Sans+3:wght@300;400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
@@ -13,181 +13,232 @@
 </head>
 <body>
 
-  <header class="site-header">
-    <div class="header-inner">
-      <p class="header-tag">FIT2179 Data Visualisation 2 &nbsp;·&nbsp; Monash University &nbsp;·&nbsp; Semester 1, 2026</p>
-      <h1>Australia's International Student Story</h1>
-      <p class="header-sub">
-        Over two decades, international students have become one of Australia's most important economic
-        and cultural contributors. This visualisation explores enrolment trends, source countries,
-        visa policy shifts, and how COVID-19 reshaped the sector.
+  <!-- ── HERO ─────────────────────────────────────────────────── -->
+  <header class="hero">
+    <div class="hero-grid">
+      <div class="hero-meta">
+        <span class="kicker"><span class="kicker-dot"></span>A Data Investigation</span>
+        <span class="hero-edition">FIT2179 · Monash University · 2026</span>
+      </div>
+      <h1 class="hero-title">Australia's<br/><em>International</em><br/>Student Story</h1>
+      <p class="hero-lede">
+        Two decades of growth, a pandemic collapse, and a record-shattering rebound.
+        We trace the data behind a fifty-billion-dollar industry — and the policy
+        decisions quietly reshaping who gets to study here.
       </p>
-      <div class="header-stats">
-        <div class="stat-box">
-          <span class="stat-num">1.6M+</span>
-          <span class="stat-label">Active enrolments (2025)</span>
-        </div>
-        <div class="stat-box">
-          <span class="stat-num">135+</span>
-          <span class="stat-label">Source countries</span>
-        </div>
-        <div class="stat-box">
-          <span class="stat-num">$50B</span>
-          <span class="stat-label">Annual economic value</span>
-        </div>
-        <div class="stat-box">
-          <span class="stat-num">5</span>
-          <span class="stat-label">Education sectors</span>
-        </div>
+      <div class="hero-byline">
+        <span>By Nihar Kulkarni</span>
+        <span class="sep">/</span>
+        <span>Sources: DESE &amp; Dept. of Home Affairs</span>
+      </div>
+    </div>
+
+    <div class="hero-figures">
+      <div class="figure">
+        <span class="figure-num">1.6M</span>
+        <span class="figure-cap">Active enrolments in 2025</span>
+      </div>
+      <div class="figure">
+        <span class="figure-num">135<sup>+</sup></span>
+        <span class="figure-cap">Countries of origin</span>
+      </div>
+      <div class="figure">
+        <span class="figure-num">$50B</span>
+        <span class="figure-cap">Annual value to the economy</span>
+      </div>
+      <div class="figure">
+        <span class="figure-num">−73%</span>
+        <span class="figure-cap">ELICOS collapse at the 2021 low</span>
       </div>
     </div>
   </header>
 
-  <nav class="chapter-nav">
-    <a href="#chapter1">1. Growth &amp; Collapse</a>
-    <a href="#chapter2">2. Where Students Come From</a>
-    <a href="#chapter3">3. Visa Policy</a>
-    <a href="#chapter4">4. Sector Recovery</a>
-    <a href="#chapter5">5. Looking Ahead</a>
+  <!-- ── NAV ──────────────────────────────────────────────────── -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <span class="nav-brand">The Student Story</span>
+      <div class="nav-links">
+        <a href="#ch1">01 Growth</a>
+        <a href="#ch2">02 Origins</a>
+        <a href="#ch3">03 Visas</a>
+        <a href="#ch4">04 Recovery</a>
+        <a href="#ch5">05 Ahead</a>
+      </div>
+    </div>
   </nav>
 
-  <main class="page-wrap">
+  <main>
 
-    <section class="chapter" id="chapter1">
-      <div class="chapter-header">
-        <span class="chapter-num">01</span>
-        <div>
-          <h2>Two Decades of Growth — and One Catastrophic Pause</h2>
-          <p class="chapter-intro">
-            Australia's international education sector grew steadily from 2005 through 2019,
-            making it one of the world's top study destinations. COVID-19 caused a dramatic collapse
-            in 2020–21. Since reopening, enrolments have surged to record highs — but the recovery
-            has not been equal across all sectors.
+    <!-- ════ CHAPTER 1 ════ -->
+    <section class="chapter" id="ch1">
+      <div class="chapter-intro">
+        <div class="intro-left">
+          <span class="chapter-tag">Chapter 01</span>
+          <h2 class="chapter-title">Growth, Collapse,<br/>and Rebound</h2>
+        </div>
+        <div class="intro-right">
+          <p class="lead">
+            From 2005 to 2019, Australia built one of the world's largest international
+            education sectors. Then the pandemic closed the borders — and enrolments
+            fell off a cliff. What happened next surprised everyone.
+          </p>
+          <p>
+            Higher Education enrolments grew <mark>47%</mark> between 2019 and 2025,
+            reaching an all-time record of <mark>545,259</mark> students. But the
+            recovery was deeply uneven. The English-language sector, ELICOS, fell
+            <mark>73%</mark> below its pre-pandemic peak at the 2021 low — and still
+            hasn't fully recovered.
           </p>
         </div>
       </div>
 
-      <div class="callout-row">
-        <div class="callout">
-          <div class="callout-num">+47%</div>
-          <p>Higher Education enrolment growth from 2019 to 2025</p>
-        </div>
-        <div class="callout callout-b">
-          <div class="callout-num">2021</div>
-          <p>Crisis low — ELICOS dropped 73% below 2019 levels</p>
-        </div>
-        <div class="callout callout-c">
-          <div class="callout-num">545K</div>
-          <p>Higher Ed enrolments in 2025 — a new all-time record</p>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>Higher Education Enrolments &amp; Commencements, 2019–2025</h3>
-        <p class="chart-desc">Enrolments capture all active students; commencements are new students only. The COVID dip hit commencements hardest as international travel stopped.</p>
+      <figure class="viz">
+        <figcaption class="viz-head">
+          <span class="viz-num">Figure 1</span>
+          <h3>Higher Education didn't just recover — it broke records</h3>
+          <p>Enrolments count all active students; commencements count only new arrivals. The gap reveals how dramatically intake collapsed during the border closures.</p>
+        </figcaption>
         <div id="chart1"></div>
-        <p class="source-note">Source: Australian Government DESE International Student Data 2025</p>
-      </div>
+        <figcaption class="viz-source">Australian Government DESE · International Student Data 2025</figcaption>
+      </figure>
 
-      <div class="card">
-        <h3>All Sectors: Enrolment Trends, 2019–2025</h3>
-        <p class="chart-desc">Each line represents one education sector. ELICOS suffered the steepest collapse. Higher Education and VET proved more resilient.</p>
+      <figure class="viz">
+        <figcaption class="viz-head">
+          <span class="viz-num">Figure 2</span>
+          <h3>Five sectors, five very different pandemics</h3>
+          <p>While Higher Education and VET proved resilient, the short-course ELICOS sector was uniquely exposed to the collapse in international travel.</p>
+        </figcaption>
         <div id="chart2"></div>
-        <p class="source-note">Source: Australian Government DESE International Student Data 2025</p>
-      </div>
+        <figcaption class="viz-source">Australian Government DESE · International Student Data 2025</figcaption>
+      </figure>
 
-      <div class="card">
-        <h3>Commencement-to-Enrolment Ratio by Sector, 2019–2025</h3>
-        <p class="chart-desc">This ratio shows what proportion of all enrolled students are brand new each year. A higher ratio means a sector depends on constant new intake — typical of short courses like ELICOS.</p>
+      <figure class="viz">
+        <figcaption class="viz-head">
+          <span class="viz-num">Figure 3</span>
+          <h3>Which sectors live on constant new intake?</h3>
+          <p>The commencement-to-enrolment ratio reveals dependency: a high ratio means a sector must continually refill, typical of short courses.</p>
+        </figcaption>
         <div id="chart11"></div>
-        <p class="source-note">Source: Australian Government DESE International Student Data 2025</p>
-      </div>
+        <figcaption class="viz-source">Australian Government DESE · International Student Data 2025</figcaption>
+      </figure>
     </section>
 
-    <hr class="divider" />
+    <!-- ════ PULL QUOTE ════ -->
+    <blockquote class="pullquote">
+      <span class="quote-mark">“</span>
+      The 2021 low point wasn't just a dip — it erased a decade of sustained growth in a single year.
+    </blockquote>
 
-    <section class="chapter" id="chapter2">
-      <div class="chapter-header">
-        <span class="chapter-num">02</span>
-        <div>
-          <h2>Where Do Australia's International Students Come From?</h2>
-          <p class="chapter-intro">
-            China has historically dominated, but India is rapidly closing the gap. Nepal, Vietnam,
-            and several Latin American countries have also surged. The world map below shows which
-            countries send students to Australia and in what volumes.
+    <!-- ════ CHAPTER 2 ════ -->
+    <section class="chapter" id="ch2">
+      <div class="chapter-intro">
+        <div class="intro-left">
+          <span class="chapter-tag">Chapter 02</span>
+          <h2 class="chapter-title">Where the<br/>Students Come From</h2>
+        </div>
+        <div class="intro-right">
+          <p class="lead">
+            China has long dominated Australia's international classrooms. But India
+            is closing the gap fast — and in 2025, the two were almost level for the
+            first time on record.
+          </p>
+          <p>
+            Together, China and India account for more than <mark>40%</mark> of all
+            students over two decades. That concentration is both a strength and a
+            structural risk for the sector.
           </p>
         </div>
       </div>
 
-      <div class="card">
-        <h3>World Map: Total International Students by Country of Origin (2005–2025)</h3>
-        <p class="chart-desc">Darker shading indicates more students sent to Australia. Hover over a country to see its total.</p>
+      <figure class="viz">
+        <figcaption class="viz-head">
+          <span class="viz-num">Figure 4</span>
+          <h3>A world map of demand for an Australian education</h3>
+          <p>Toggle between two decades of cumulative totals and the most recent year. The 2025 view reveals where momentum is building right now.</p>
+        </figcaption>
+        <div class="toggle-row" id="worldToggle">
+          <button class="tog-btn active" data-view="cumulative">All-Time Totals · 2005–2025</button>
+          <button class="tog-btn" data-view="recent">2025 Only</button>
+        </div>
         <div id="mapWorld"></div>
-        <p class="source-note">Source: Australian Government DESE International Student Data 2025</p>
-      </div>
+        <figcaption class="viz-source">Australian Government DESE · International Student Data 2025</figcaption>
+      </figure>
 
-      <div class="card">
-        <h3>Top 15 Source Countries — Cumulative Students (2005–2025)</h3>
-        <p class="chart-desc">The orange bar shows students from 2005–2024. The gold extension shows 2025 new arrivals — revealing which countries are surging right now.</p>
+      <figure class="viz">
+        <figcaption class="viz-head">
+          <span class="viz-num">Figure 5</span>
+          <h3>The top 15 — and how much arrived in 2025 alone</h3>
+          <p>The lighter extension on each bar isolates the 2025 intake, exposing which countries are accelerating.</p>
+        </figcaption>
         <div id="chart3"></div>
-        <p class="source-note">Source: Australian Government DESE International Student Data 2025</p>
-      </div>
+        <figcaption class="viz-source">Australian Government DESE · International Student Data 2025</figcaption>
+      </figure>
 
-      <div class="two-col">
-        <div class="card">
-          <h3>2025 New Arrivals: Top 12 Countries</h3>
-          <p class="chart-desc">Students newly enrolled in 2025 only, ranked by volume.</p>
+      <div class="viz-pair">
+        <figure class="viz">
+          <figcaption class="viz-head">
+            <span class="viz-num">Figure 6</span>
+            <h3>Who arrived in 2025</h3>
+            <p>The twelve largest source countries for the most recent intake year.</p>
+          </figcaption>
           <div id="chart4a"></div>
-        </div>
-        <div class="card">
-          <h3>Country Rankings Over Time (2019–2025)</h3>
-          <p class="chart-desc">A bump chart showing how each country's rank has shifted year by year.</p>
+        </figure>
+        <figure class="viz">
+          <figcaption class="viz-head">
+            <span class="viz-num">Figure 7</span>
+            <h3>Two decades of shifting ranks</h3>
+            <p>A bump chart tracks how each country's position rose or fell, year by year.</p>
+          </figcaption>
           <div id="chartBump"></div>
-        </div>
+        </figure>
       </div>
 
-      <div class="card">
-        <h3>2019 vs 2025: Which Countries Grew or Shrank?</h3>
-        <p class="chart-desc">Each dot is a country. Dots above the diagonal grew between 2019 and 2025. Dots below shrank. Dot size reflects all-time total students.</p>
+      <figure class="viz">
+        <figcaption class="viz-head">
+          <span class="viz-num">Figure 8</span>
+          <h3>Growth and decline, country by country</h3>
+          <p>Each dot is a country; those above the diagonal grew between 2019 and 2025. <strong>Scroll to zoom and drag to pan</strong> — the smaller nations cluster tightly near the origin.</p>
+        </figcaption>
         <div id="chart12"></div>
-        <p class="source-note">Source: Australian Government DESE International Student Data 2025</p>
-      </div>
+        <figcaption class="viz-source">Australian Government DESE · International Student Data 2025</figcaption>
+      </figure>
     </section>
 
-    <hr class="divider" />
+    <!-- ════ PULL QUOTE ════ -->
+    <blockquote class="pullquote">
+      <span class="quote-mark">“</span>
+      India is no longer catching up. In 2025, it arrived almost level with China for the first time in recorded history.
+    </blockquote>
 
-    <section class="chapter" id="chapter3">
-      <div class="chapter-header">
-        <span class="chapter-num">03</span>
-        <div>
-          <h2>The Visa Gatekeeping Shift</h2>
-          <p class="chapter-intro">
-            Getting a student visa to Australia has become harder — especially for VET students.
-            Grant rates tell a story of deliberate policy tightening since 2022.
+    <!-- ════ CHAPTER 3 ════ -->
+    <section class="chapter" id="ch3">
+      <div class="chapter-intro">
+        <div class="intro-left">
+          <span class="chapter-tag">Chapter 03</span>
+          <h2 class="chapter-title">The Quiet<br/>Tightening of Visas</h2>
+        </div>
+        <div class="intro-right">
+          <p class="lead">
+            Getting a student visa to Australia has become measurably harder — but
+            not equally for everyone. The data reveals a sector being deliberately
+            reshaped by policy.
+          </p>
+          <p>
+            Postgraduate researchers still enjoy a <mark>98%</mark> grant rate. But
+            for the vocational sector, approvals collapsed from <mark>93%</mark> in
+            2006 to just <mark>52%</mark> by 2025 — a fall of 34 percentage points.
           </p>
         </div>
       </div>
 
-      <div class="callout-row">
-        <div class="callout">
-          <div class="callout-num">98%</div>
-          <p>Postgrad Research grant rate — most welcomed student type</p>
-        </div>
-        <div class="callout callout-b">
-          <div class="callout-num">52%</div>
-          <p>VET grant rate in 2025–26, down from 93% in 2006</p>
-        </div>
-        <div class="callout callout-c">
-          <div class="callout-num">−34pp</div>
-          <p>Drop in VET visa grant rate over two decades</p>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>Visa Grant Rates by Sector, 2005–2025</h3>
-        <p class="chart-desc">Use the buttons to filter by sector. All sectors dipped during COVID. The VET sector never recovered — falling to its lowest rate ever by 2024–25.</p>
+      <figure class="viz">
+        <figcaption class="viz-head">
+          <span class="viz-num">Figure 9</span>
+          <h3>How hard is it to get a visa? It depends what you study</h3>
+          <p>Filter by sector to follow each line. Every sector dipped during COVID — but only VET failed to recover.</p>
+        </figcaption>
         <div class="toggle-row" id="sectorToggle">
-          <button class="tog-btn active" data-sector="all">All</button>
+          <button class="tog-btn active" data-sector="all">All Sectors</button>
           <button class="tog-btn" data-sector="Higher Education Sector">Higher Ed</button>
           <button class="tog-btn" data-sector="Vocational Education and Training Sector">VET</button>
           <button class="tog-btn" data-sector="Postgraduate Research Sector">Postgrad</button>
@@ -195,129 +246,199 @@
           <button class="tog-btn" data-sector="Independent ELICOS Sector">ELICOS</button>
         </div>
         <div id="chart5"></div>
-        <p class="source-note">Source: Australian Government Department of Home Affairs</p>
-      </div>
+        <figcaption class="viz-source">Australian Government · Department of Home Affairs</figcaption>
+      </figure>
 
-      <div class="card">
-        <h3>Visa Grant Rate Change: 2005–06 vs 2024–25</h3>
-        <p class="chart-desc">Each row shows where a sector started (grey dot) and ended (solid dot). Red means tightened, orange means loosened.</p>
+      <figure class="viz">
+        <figcaption class="viz-head">
+          <span class="viz-num">Figure 10</span>
+          <h3>Two decades of policy change, in one chart</h3>
+          <p>Each line tracks a sector from its 2005–06 grant rate to 2024–25. Red marks a tightening; orange, a loosening or stability.</p>
+        </figcaption>
         <div id="chart13"></div>
-        <p class="source-note">Source: Australian Government Department of Home Affairs</p>
-      </div>
+        <figcaption class="viz-source">Australian Government · Department of Home Affairs</figcaption>
+      </figure>
 
-      <div class="card">
-        <h3>Higher Education: Visa Lodgements vs Grants, 2022–2025</h3>
-        <p class="chart-desc">As applications surged post-COVID, approval rates fell. The red portion shows visas refused or withdrawn.</p>
+      <figure class="viz">
+        <figcaption class="viz-head">
+          <span class="viz-num">Figure 11</span>
+          <h3>A widening gap between applying and being approved</h3>
+          <p>As Higher Education applications surged after COVID, the share refused or withdrawn grew with them.</p>
+        </figcaption>
         <div id="chart6"></div>
-        <p class="source-note">Source: Australian Government Department of Home Affairs</p>
-      </div>
+        <figcaption class="viz-source">Australian Government · Department of Home Affairs</figcaption>
+      </figure>
     </section>
 
-    <hr class="divider" />
-
-    <section class="chapter" id="chapter4">
-      <div class="chapter-header">
-        <span class="chapter-num">04</span>
-        <div>
-          <h2>How Each Sector Recovered After COVID</h2>
-          <p class="chapter-intro">
-            Not all sectors bounced back equally. Higher Education surged to record highs.
-            VET recovered but faces tighter visa conditions. ELICOS remains well below its pre-pandemic peak.
+    <!-- ════ CHAPTER 4 ════ -->
+    <section class="chapter" id="ch4">
+      <div class="chapter-intro">
+        <div class="intro-left">
+          <span class="chapter-tag">Chapter 04</span>
+          <h2 class="chapter-title">An Uneven<br/>Recovery</h2>
+        </div>
+        <div class="intro-right">
+          <p class="lead">
+            The collapse hit every sector. The recovery did not. By 2025, some
+            sectors had broken records — while others sat stranded at half their
+            pre-pandemic size.
+          </p>
+          <p>
+            Higher Education now accounts for nearly <mark>half</mark> of all
+            international enrolments. ELICOS, once a vibrant entry point, remains
+            at roughly <mark>52%</mark> of its 2019 commencements.
           </p>
         </div>
       </div>
 
-      <div class="card">
-        <h3>Total Enrolments by Sector — Stacked Area, 2019–2025</h3>
-        <p class="chart-desc">The total height shows combined enrolments across all sectors. Higher Education's growing dominance is clear from the expanding orange area.</p>
+      <figure class="viz">
+        <figcaption class="viz-head">
+          <span class="viz-num">Figure 12</span>
+          <h3>The shifting composition of a sector</h3>
+          <p>Total height shows combined enrolments; the expanding upper band reveals Higher Education's growing dominance.</p>
+        </figcaption>
         <div id="chart7"></div>
-        <p class="source-note">Source: Australian Government DESE International Student Data 2025</p>
-      </div>
+        <figcaption class="viz-source">Australian Government DESE · International Student Data 2025</figcaption>
+      </figure>
 
-      <div class="card">
-        <h3>Commencement Recovery Index (2019 = 100)</h3>
-        <p class="chart-desc">Index shows each sector relative to its own 2019 level. Above 100 means fully recovered. ELICOS remains at roughly half its 2019 intake.</p>
+      <figure class="viz">
+        <figcaption class="viz-head">
+          <span class="viz-num">Figure 13</span>
+          <h3>Indexed to 2019: who has truly recovered?</h3>
+          <p>Each sector is set to 100 at its own 2019 level. Above the line means a full recovery; below means it is still behind.</p>
+        </figcaption>
         <div id="chart8"></div>
-        <p class="source-note">Source: Australian Government DESE International Student Data 2025</p>
-      </div>
+        <figcaption class="viz-source">Australian Government DESE · International Student Data 2025</figcaption>
+      </figure>
 
-      <div class="card">
-        <h3>2019 vs 2025 Enrolments by Sector — Slope Chart</h3>
-        <p class="chart-desc">Each line connects a sector's 2019 enrolment to its 2025 enrolment. Rising lines show growth; steepness shows how much.</p>
+      <figure class="viz">
+        <figcaption class="viz-head">
+          <span class="viz-num">Figure 14</span>
+          <h3>2019 versus 2025, side by side</h3>
+          <p>A slope chart connects each sector's starting and ending enrolments — the steeper the line, the larger the shift.</p>
+        </figcaption>
         <div id="chartSlope"></div>
-        <p class="source-note">Source: Australian Government DESE International Student Data 2025</p>
-      </div>
+        <figcaption class="viz-source">Australian Government DESE · International Student Data 2025</figcaption>
+      </figure>
 
-      <div class="card">
-        <h3>VET Sector: Visa Volume vs Grant Rate, 2005–2025</h3>
-        <p class="chart-desc">Bars show total visa lodgements (left axis). The red line shows the grant rate (right axis). As volume stayed high after 2022, the grant rate collapsed.</p>
+      <figure class="viz">
+        <figcaption class="viz-head">
+          <span class="viz-num">Figure 15</span>
+          <h3>The VET sector: high volume, falling approval</h3>
+          <p>Bars show visa applications; the line shows the grant rate. After 2022, volume stayed high while approvals fell sharply.</p>
+        </figcaption>
         <div id="chart10"></div>
-        <p class="source-note">Source: Australian Government Department of Home Affairs</p>
-      </div>
+        <figcaption class="viz-source">Australian Government · Department of Home Affairs</figcaption>
+      </figure>
     </section>
 
-    <hr class="divider" />
-
-    <section class="chapter" id="chapter5">
-      <div class="chapter-header">
-        <span class="chapter-num">05</span>
-        <div>
-          <h2>Geographic Distribution and the Road Ahead</h2>
-          <p class="chapter-intro">
-            Within Australia, international students are heavily concentrated in NSW and Victoria.
-            The map below shows how students are distributed across states and territories.
+    <!-- ════ CHAPTER 5 ════ -->
+    <section class="chapter" id="ch5">
+      <div class="chapter-intro">
+        <div class="intro-left">
+          <span class="chapter-tag">Chapter 05</span>
+          <h2 class="chapter-title">Where the<br/>Students Land</h2>
+        </div>
+        <div class="intro-right">
+          <p class="lead">
+            Inside Australia, international students are not spread evenly. Two
+            states — New South Wales and Victoria — host the overwhelming majority.
+          </p>
+          <p>
+            That concentration mirrors the location of the country's largest
+            universities, clustered in Sydney and Melbourne.
           </p>
         </div>
       </div>
 
-      <div class="card">
-        <h3>Australia Map: International Students by State/Territory (2025)</h3>
-        <p class="chart-desc">Darker shading indicates more international students. NSW and Victoria dominate due to the concentration of major universities in Sydney and Melbourne.</p>
+      <figure class="viz">
+        <figcaption class="viz-head">
+          <span class="viz-num">Figure 16</span>
+          <h3>A nation's students, by state and territory</h3>
+          <p>Darker shading marks higher enrolment. The map makes the Sydney–Melbourne concentration impossible to miss.</p>
+        </figcaption>
         <div id="mapAustralia"></div>
-        <p class="source-note">Source: Australian Government DESE International Student Data 2025</p>
-      </div>
+        <figcaption class="viz-source">Australian Government DESE · International Student Data 2025</figcaption>
+      </figure>
 
-      <div class="two-col">
-        <div class="card">
-          <h3>Students by World Region (2025 Intake)</h3>
-          <p class="chart-desc">South and East Asia account for over 70% of all new students in 2025.</p>
+      <div class="viz-pair">
+        <figure class="viz">
+          <figcaption class="viz-head">
+            <span class="viz-num">Figure 17</span>
+            <h3>The world, by region</h3>
+            <p>South and East Asia together supply over 70% of the 2025 intake.</p>
+          </figcaption>
           <div id="chart9"></div>
-        </div>
-        <div class="card">
-          <h3>2025 Share of 20-Year Total by Country</h3>
-          <p class="chart-desc">How much of each country's all-time total came in 2025 alone? Higher bars suggest accelerating demand.</p>
+        </figure>
+        <figure class="viz">
+          <figcaption class="viz-head">
+            <span class="viz-num">Figure 18</span>
+            <h3>Whose growth is accelerating?</h3>
+            <p>The share of each country's all-time total that arrived in 2025 alone.</p>
+          </figcaption>
           <div id="chart4b"></div>
-        </div>
+        </figure>
       </div>
 
-      <div class="conclusion-box">
-        <h3>Key Takeaways</h3>
-        <ul>
-          <li><strong>Higher Education dominates and is growing.</strong> By 2025 it accounts for nearly half of all international enrolments, up from 39% in 2019.</li>
-          <li><strong>India is the story of the decade.</strong> Indian student arrivals in 2025 nearly matched China's for the first time — a major shift in the source country mix.</li>
-          <li><strong>VET is under policy pressure.</strong> The visa grant rate has fallen from 93% to 52% over two decades — a deliberate government response to migration-motivated enrolments.</li>
-          <li><strong>ELICOS has not recovered.</strong> English language enrolments remain at roughly half their 2019 peak, suggesting structural rather than temporary challenges.</li>
-          <li><strong>Concentration risk remains high.</strong> China and India account for over 40% of all students. Diversification is a stated policy goal but progress is slow.</li>
-        </ul>
+      <div class="takeaways">
+        <span class="chapter-tag">In Summary</span>
+        <h3>Five things the data makes clear</h3>
+        <ol class="takeaway-list">
+          <li>
+            <span class="tk-num">01</span>
+            <div><strong>Higher Education dominates and is still growing.</strong> By 2025 it makes up nearly half of all international enrolments, up from 39% in 2019.</div>
+          </li>
+          <li>
+            <span class="tk-num">02</span>
+            <div><strong>India is the story of the decade.</strong> Its 2025 arrivals nearly matched China's for the first time on record — a fundamental shift in the source mix.</div>
+          </li>
+          <li>
+            <span class="tk-num">03</span>
+            <div><strong>VET is under deliberate policy pressure.</strong> Its visa grant rate fell from 93% to 52% over two decades, targeting migration-motivated enrolments.</div>
+          </li>
+          <li>
+            <span class="tk-num">04</span>
+            <div><strong>ELICOS has not recovered.</strong> English-language enrolments remain near half their 2019 peak — a structural, not temporary, decline.</div>
+          </li>
+          <li>
+            <span class="tk-num">05</span>
+            <div><strong>Concentration risk runs deep.</strong> China and India alone account for over 40% of all students; diversification remains slow.</div>
+          </li>
+        </ol>
       </div>
     </section>
 
   </main>
 
-  <footer class="site-footer">
-    <div class="footer-inner">
+  <!-- ── FOOTER ───────────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="footer-title">Australia's International Student Story</span>
+        <span class="footer-sub">A data investigation · FIT2179 Data Visualisation 2</span>
+      </div>
+    </div>
+    <div class="footer-cols">
       <div>
-        <strong>Data Sources</strong><br>
-        International Student Data 2025 — Australian Government DESE<br>
-        Student Visa Statistics — Department of Home Affairs<br>
-        <a href="https://www.education.gov.au/international-education-data-and-research" target="_blank">education.gov.au</a>
+        <p class="footer-label">Data Sources</p>
+        <p>International Student Data 2025<br/><span>Australian Government DESE</span></p>
+        <p>Student Visa Statistics<br/><span>Department of Home Affairs</span></p>
+        <a href="https://www.education.gov.au/international-education-data-and-research" target="_blank">education.gov.au &nearr;</a>
       </div>
       <div>
-        <strong>Authorship</strong><br>
-        Created for FIT2179 Data Visualisation 2<br>
-        Monash University, Semester 1, 2026<br>
-        Visualisations: Vega-Lite v5
+        <p class="footer-label">Method</p>
+        <p>Built with Vega-Lite v5<br/><span>13 charts · 2 geographic maps</span></p>
+        <p>Two combined data sources<br/><span>Enrolment &amp; visa records</span></p>
       </div>
+      <div>
+        <p class="footer-label">Credits</p>
+        <p>Nihar Kulkarni<br/><span>Monash University · Semester 1, 2026</span></p>
+        <p>Map data: Click That Hood<br/><span>world-atlas TopoJSON</span></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Nihar Kulkarni · All rights reserved</span>
+      <span class="footer-live"><span class="kicker-dot"></span> Published</span>
     </div>
   </footer>
 

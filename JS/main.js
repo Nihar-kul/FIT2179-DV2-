@@ -1,20 +1,22 @@
 const C = {
-  orange:  '#e8721c',
-  orange2: '#f5a623',
-  red:     '#cc3333',
-  teal:    '#2a9d8f',
-  sage:    '#6aaa64',
-  purple:  '#9b72cf',
+  orange:  '#ec7a1c',
+  orange2: '#f7a64e',
+  orangeD: '#c25e10',
+  red:     '#d14343',
+  teal:    '#389b8c',
+  sage:    '#7a9d5a',
+  purple:  '#8e74b8',
   blue:    '#4a90d9',
-  ink:     '#f0f0f0',
-  muted:   '#999999',
-  bg:      '#1e1e1e',
-  border:  '#333333',
+  ink:     '#f4f4f0',
+  muted:   '#8a8a82',
+  faint:   '#5c5c54',
+  paper:   '#18181b',
+  line:    '#2a2a30',
 };
 
 const SECTOR_COLORS = {
   domain: ['Higher Education','VET','ELICOS','Schools','Non-award'],
-  range:  [C.orange, C.orange2, C.red, C.teal, C.purple],
+  range:  [C.orange, C.orange2, '#a05438', C.teal, C.purple],
 };
 
 const embedOpts = {
@@ -22,22 +24,22 @@ const embedOpts = {
   renderer: 'svg',
   config: {
     background: 'transparent',
-    font: "'Source Sans 3', sans-serif",
+    font: "'Inter', sans-serif",
     title: {
-      font: "'Playfair Display', Georgia, serif",
-      fontSize: 13, fontWeight: 700, color: C.ink, offset: 10,
+      font: "'Fraunces', Georgia, serif",
+      fontSize: 13, fontWeight: 600, color: C.ink, offset: 10,
     },
     axis: {
       labelFont: "'JetBrains Mono', monospace",
       labelFontSize: 10, labelColor: C.muted,
-      gridColor: '#2a2a2a', tickColor: C.border, domainColor: C.border,
-      titleFont: "'Source Sans 3', sans-serif",
+      gridColor: '#222226', tickColor: C.line, domainColor: C.line,
+      titleFont: "'Inter', sans-serif",
       titleFontSize: 11, titleColor: C.muted, titleFontWeight: 600,
     },
     legend: {
       labelFont: "'JetBrains Mono', monospace",
       labelFontSize: 10, labelColor: C.muted,
-      titleFont: "'Source Sans 3', sans-serif",
+      titleFont: "'Inter', sans-serif",
       titleFontSize: 10, titleFontWeight: 600, titleColor: C.ink,
       symbolSize: 80,
     },
@@ -216,11 +218,11 @@ const chart1Data = [
 ];
 vegaEmbed('#chart1', {
   $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
-  width: 'container', height: 280,
+  width: 'container', height: 290,
   data: { values: chart1Data },
   layer: [
     {
-      mark: { type: 'area', opacity: 0.12, interpolate: 'monotone' },
+      mark: { type: 'area', opacity: 0.13, interpolate: 'monotone' },
       encoding: {
         x: { field: 'Year', type: 'ordinal', axis: { labelAngle: 0 } },
         y: { field: 'Value', type: 'quantitative', stack: false, axis: { format: ',.0f', title: 'Students' } },
@@ -259,7 +261,7 @@ vegaEmbed('#chart1', {
 // ── CHART 2 ───────────────────────────────────────────────────────
 vegaEmbed('#chart2', {
   $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
-  width: 'container', height: 300,
+  width: 'container', height: 310,
   data: { values: sectorData },
   mark: { type: 'line', strokeWidth: 2.5, interpolate: 'monotone', point: { filled: true, size: 50 } },
   encoding: {
@@ -278,7 +280,7 @@ vegaEmbed('#chart2', {
 const top15 = nationalityData.slice(0, 15);
 vegaEmbed('#chart3', {
   $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
-  width: 'container', height: 380,
+  width: 'container', height: 390,
   data: { values: top15 },
   layer: [
     {
@@ -307,7 +309,7 @@ vegaEmbed('#chart3', {
 const top12 = nationalityData.slice(0, 12).sort((a, b) => b.N - a.N);
 vegaEmbed('#chart4a', {
   $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
-  width: 'container', height: 280,
+  width: 'container', height: 320,
   data: { values: top12 },
   mark: { type: 'bar', cornerRadiusEnd: 2 },
   encoding: {
@@ -324,7 +326,7 @@ const shareData = nationalityData.slice(0, 15).map(d => ({
 }));
 vegaEmbed('#chart4b', {
   $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
-  width: 'container', height: 280,
+  width: 'container', height: 290,
   data: { values: shareData },
   layer: [
     {
@@ -358,11 +360,11 @@ function renderChart5(sector) {
     : { value: C.orange };
   vegaEmbed('#chart5', {
     $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
-    width: 'container', height: 300,
+    width: 'container', height: 310,
     data: { values: filtered },
     layer: [
       {
-        mark: { type: 'area', opacity: 0.07, interpolate: 'monotone' },
+        mark: { type: 'area', opacity: 0.08, interpolate: 'monotone' },
         encoding: {
           x: { field: 'FY', type: 'ordinal', axis: { labelAngle: -40, labelLimit: 80 } },
           y: { field: 'Rate', type: 'quantitative', stack: false, scale: { domain: [40, 100] }, axis: { title: 'Grant Rate (%)' } },
@@ -390,9 +392,9 @@ function renderChart5(sector) {
   }, embedOpts);
 }
 renderChart5('all');
-document.querySelectorAll('.tog-btn').forEach(btn => {
+document.querySelectorAll('#sectorToggle .tog-btn').forEach(btn => {
   btn.addEventListener('click', function () {
-    document.querySelectorAll('.tog-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('#sectorToggle .tog-btn').forEach(b => b.classList.remove('active'));
     this.classList.add('active');
     renderChart5(this.dataset.sector);
   });
@@ -413,7 +415,7 @@ recentVisa.forEach(d => {
 });
 vegaEmbed('#chart6', {
   $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
-  width: 'container', height: 260,
+  width: 'container', height: 270,
   data: { values: gapData },
   mark: { type: 'bar', cornerRadiusTopLeft: 2, cornerRadiusTopRight: 2 },
   encoding: {
@@ -435,7 +437,7 @@ vegaEmbed('#chart7', {
   $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
   width: 'container', height: 340,
   data: { values: stackedRows },
-  mark: { type: 'area', interpolate: 'monotone' },
+  mark: { type: 'area', interpolate: 'monotone', opacity: 0.92 },
   encoding: {
     x: {
       field: 'YearStr', type: 'ordinal',
@@ -449,7 +451,10 @@ vegaEmbed('#chart7', {
     },
     color: {
       field: 'Sector', type: 'nominal',
-      scale: SECTOR_COLORS,
+      scale: {
+        domain: ['Higher Education','VET','ELICOS','Schools','Non-award'],
+        range: ['#b85d24', '#8a6a3a', '#5a4232', '#4a6655', '#5a4f6e'],
+      },
       legend: { orient: 'right', title: 'Sector' },
     },
     order: {
@@ -468,7 +473,7 @@ const indexData = sectorData.map(d => ({
 }));
 vegaEmbed('#chart8', {
   $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
-  width: 'container', height: 300,
+  width: 'container', height: 310,
   data: { values: indexData },
   layer: [
     {
@@ -508,7 +513,7 @@ const regionData = [
 ].sort((a, b) => b.Students - a.Students);
 vegaEmbed('#chart9', {
   $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
-  width: 'container', height: 260,
+  width: 'container', height: 290,
   data: { values: regionData },
   mark: { type: 'bar', cornerRadiusEnd: 3 },
   encoding: {
@@ -523,7 +528,7 @@ vegaEmbed('#chart9', {
 const vetVisa = visaRawData.filter(d => d.Sector === 'Vocational Education and Training Sector');
 vegaEmbed('#chart10', {
   $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
-  width: 'container', height: 300,
+  width: 'container', height: 310,
   data: { values: vetVisa },
   layer: [
     {
@@ -559,7 +564,7 @@ const ratioData = sectorData.map(d => ({
 }));
 vegaEmbed('#chart11', {
   $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
-  width: 'container', height: 280,
+  width: 'container', height: 290,
   data: { values: ratioData },
   mark: { type: 'line', strokeWidth: 2.5, interpolate: 'monotone', point: { filled: true, size: 50 } },
   encoding: {
@@ -570,49 +575,51 @@ vegaEmbed('#chart11', {
   },
 }, embedOpts);
 
-// ── CHART 12 ──────────────────────────────────────────────────────
+// ── CHART 12 — scatter with zoom ──────────────────────────────────
 const uniqueNat = nationalityData.filter((d, i, a) => a.findIndex(x => x.Nationality === d.Nationality) === i);
-const maxV = Math.max(...uniqueNat.map(d => Math.max(d.E2019, d.N))) * 1.08;
+
 vegaEmbed('#chart12', {
   $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
-  width: 'container', height: 400,
+  width: 'container',
+  height: 440,
   data: { values: uniqueNat },
-  layer: [
-    {
-      mark: { type: 'line', color: '#444', strokeDash: [5, 4], strokeWidth: 1 },
-      data: { values: [{ x: 0, y: 0 }, { x: maxV, y: maxV }] },
-      encoding: {
-        x: { field: 'x', type: 'quantitative' },
-        y: { field: 'y', type: 'quantitative' },
-      },
+  selection: {
+    scatterZoom: {
+      type: 'interval',
+      bind: 'scales'
+    }
+  },
+  mark: { type: 'circle', opacity: 0.85 },
+  encoding: {
+    x: {
+      field: 'E2019',
+      type: 'quantitative',
+      title: '2019 Students',
+      axis: { format: ',.0f' }
     },
-    {
-      mark: { type: 'point', filled: true, opacity: 0.85 },
-      encoding: {
-        x: { field: 'E2019', type: 'quantitative', axis: { format: ',.0f', title: '2019 Students' }, scale: { domain: [0, maxV] } },
-        y: { field: 'N',     type: 'quantitative', axis: { format: ',.0f', title: '2025 Students' }, scale: { domain: [0, maxV] } },
-        size: { field: 'T', type: 'quantitative', scale: { range: [60, 700] }, legend: null },
-        color: {
-          condition: { test: 'datum.N > datum.E2019', value: C.orange },
-          value: C.red,
-        },
-        tooltip: [
-          { field: 'Nationality' },
-          { field: 'E2019', title: '2019', format: ',.0f' },
-          { field: 'N',     title: '2025', format: ',.0f' },
-          { field: 'T',     title: 'All-time total', format: ',.0f' },
-        ],
-      },
+    y: {
+      field: 'N',
+      type: 'quantitative',
+      title: '2025 Students',
+      axis: { format: ',.0f' }
     },
-    {
-      mark: { type: 'text', dy: -11, fontSize: 9.5, color: C.ink },
-      encoding: {
-        x: { field: 'E2019', type: 'quantitative', scale: { domain: [0, maxV] } },
-        y: { field: 'N',     type: 'quantitative', scale: { domain: [0, maxV] } },
-        text: { field: 'Nationality' },
-      },
+    size: {
+      field: 'T',
+      type: 'quantitative',
+      scale: { range: [70, 750] },
+      legend: null
     },
-  ],
+    color: {
+      condition: { test: 'datum.N > datum.E2019', value: '#ec7a1c' },
+      value: '#d14343'
+    },
+    tooltip: [
+      { field: 'Nationality', type: 'nominal', title: 'Country' },
+      { field: 'E2019', type: 'quantitative', title: '2019 Students', format: ',.0f' },
+      { field: 'N', type: 'quantitative', title: '2025 Students', format: ',.0f' },
+      { field: 'T', type: 'quantitative', title: 'All-time total', format: ',.0f' }
+    ]
+  }
 }, embedOpts);
 
 // ── CHART 13 ──────────────────────────────────────────────────────
@@ -710,34 +717,49 @@ bumpYears.forEach(year => {
 const bumpColors = [C.orange, C.orange2, C.red, C.teal, C.purple, C.blue, C.sage, '#888888'];
 vegaEmbed('#chartBump', {
   $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
-  width: 'container', height: 300,
+  width: 'container', height: 350,
+  padding: { left: 16, right: 110, top: 12, bottom: 20 },
   data: { values: bumpData },
   layer: [
     {
       mark: { type: 'line', strokeWidth: 2.5, interpolate: 'monotone' },
       encoding: {
-        x: { field: 'Year', type: 'ordinal', axis: { labelAngle: 0 } },
-        y: { field: 'Rank', type: 'quantitative', scale: { domain: [8.5, 0.5] }, axis: { title: 'Rank', tickCount: 8 } },
-        color: { field: 'Country', type: 'nominal', scale: { domain: bumpCountries, range: bumpColors } },
+        x: {
+          field: 'Year', type: 'ordinal',
+          scale: { padding: 0.08 },
+          axis: {
+            title: 'Year',
+            labelAngle: -45,
+            labelFontSize: 11,
+            labelPadding: 6,
+            labelOverlap: false,
+          },
+        },
+        y: {
+          field: 'Rank', type: 'quantitative',
+          scale: { domain: [8.6, 0.4] },
+          axis: { title: 'Rank (1 = most students)', tickCount: 8, values: [1,2,3,4,5,6,7,8] },
+        },
+        color: { field: 'Country', type: 'nominal', scale: { domain: bumpCountries, range: bumpColors }, legend: null },
         tooltip: [{ field: 'Country' }, { field: 'Year' }, { field: 'Rank' }, { field: 'Students', format: ',.0f' }],
       },
     },
     {
-      mark: { type: 'point', filled: true, size: 65 },
+      mark: { type: 'point', filled: true, size: 62 },
       encoding: {
         x: { field: 'Year', type: 'ordinal' },
-        y: { field: 'Rank', type: 'quantitative', scale: { domain: [8.5, 0.5] } },
-        color: { field: 'Country', type: 'nominal', scale: { domain: bumpCountries, range: bumpColors } },
+        y: { field: 'Rank', type: 'quantitative', scale: { domain: [8.6, 0.4] } },
+        color: { field: 'Country', type: 'nominal', scale: { domain: bumpCountries, range: bumpColors }, legend: null },
       },
     },
     {
-      mark: { type: 'text', align: 'right', dx: -7, fontSize: 9, fontWeight: 600 },
-      data: { values: bumpData.filter(d => d.Year === 2019) },
+      mark: { type: 'text', align: 'left', dx: 16, fontSize: 10.5, fontWeight: 600 },
+      data: { values: bumpData.filter(d => d.Year === 2025) },
       encoding: {
-        y: { field: 'Rank', type: 'quantitative', scale: { domain: [8.5, 0.5] } },
+        y: { field: 'Rank', type: 'quantitative', scale: { domain: [8.6, 0.4] } },
         x: { field: 'Year', type: 'ordinal' },
         text: { field: 'Country' },
-        color: { field: 'Country', type: 'nominal', scale: { domain: bumpCountries, range: bumpColors } },
+        color: { field: 'Country', type: 'nominal', scale: { domain: bumpCountries, range: bumpColors }, legend: null },
       },
     },
   ],
@@ -749,15 +771,16 @@ const slopeData = sectorData
   .map(d => ({ Sector: d.Sector, Year: String(d.Year), Enrolments: d.Enrolments }));
 vegaEmbed('#chartSlope', {
   $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
-  width: 'container', height: 300,
+  width: 'container', height: 320,
+  padding: { left: 10, right: 80, top: 10, bottom: 10 },
   data: { values: slopeData },
   layer: [
     {
       mark: { type: 'line', strokeWidth: 2.5 },
       encoding: {
-        x: { field: 'Year', type: 'ordinal', axis: { labelAngle: 0 } },
+        x: { field: 'Year', type: 'ordinal', axis: { labelAngle: 0 }, scale: { padding: 0.2 } },
         y: { field: 'Enrolments', type: 'quantitative', axis: { format: ',.0f', title: 'Enrolments' } },
-        color: { field: 'Sector', type: 'nominal', scale: SECTOR_COLORS },
+        color: { field: 'Sector', type: 'nominal', scale: SECTOR_COLORS, legend: null },
         tooltip: [{ field: 'Sector' }, { field: 'Year' }, { field: 'Enrolments', format: ',.0f' }],
       },
     },
@@ -766,87 +789,108 @@ vegaEmbed('#chartSlope', {
       encoding: {
         x: { field: 'Year', type: 'ordinal' },
         y: { field: 'Enrolments', type: 'quantitative' },
-        color: { field: 'Sector', type: 'nominal', scale: SECTOR_COLORS },
+        color: { field: 'Sector', type: 'nominal', scale: SECTOR_COLORS, legend: null },
       },
     },
     {
-      mark: { type: 'text', align: 'left', dx: 8, fontSize: 9.5, fontWeight: 600 },
+      mark: { type: 'text', align: 'left', dx: 12, fontSize: 9.5, fontWeight: 600 },
       data: { values: slopeData.filter(d => d.Year === '2025') },
       encoding: {
         x: { field: 'Year', type: 'ordinal' },
         y: { field: 'Enrolments', type: 'quantitative' },
         text: { field: 'Sector' },
-        color: { field: 'Sector', type: 'nominal', scale: SECTOR_COLORS },
+        color: { field: 'Sector', type: 'nominal', scale: SECTOR_COLORS, legend: null },
       },
     },
   ],
 }, embedOpts);
 
-// ── WORLD MAP ─────────────────────────────────────────────────────
+// ── WORLD MAP (cumulative ↔ recent toggle) ─────────────────────────
 const worldStudentData = [
-  { id: '156', country: 'China',        students: 957774 },
-  { id: '356', country: 'India',        students: 601899 },
-  { id: '524', country: 'Nepal',        students: 216732 },
-  { id: '410', country: 'South Korea',  students: 156140 },
-  { id: '076', country: 'Brazil',       students: 153658 },
-  { id: '840', country: 'USA',          students: 147459 },
-  { id: '704', country: 'Vietnam',      students: 145214 },
-  { id: '458', country: 'Malaysia',     students: 135789 },
-  { id: '764', country: 'Thailand',     students: 123547 },
-  { id: '170', country: 'Colombia',     students: 122209 },
-  { id: '392', country: 'Japan',        students: 115151 },
-  { id: '360', country: 'Indonesia',    students: 115002 },
-  { id: '608', country: 'Philippines',  students: 110774 },
-  { id: '586', country: 'Pakistan',     students: 86734  },
-  { id: '158', country: 'Taiwan',       students: 70288  },
-  { id: '144', country: 'Sri Lanka',    students: 70140  },
-  { id: '050', country: 'Bangladesh',   students: 67216  },
-  { id: '276', country: 'Germany',      students: 67127  },
-  { id: '826', country: 'UK',           students: 58000  },
-  { id: '250', country: 'France',       students: 42000  },
-  { id: '124', country: 'Canada',       students: 38000  },
-  { id: '484', country: 'Mexico',       students: 32000  },
-  { id: '152', country: 'Chile',        students: 28000  },
-  { id: '032', country: 'Argentina',    students: 24000  },
-  { id: '682', country: 'Saudi Arabia', students: 22000  },
-  { id: '404', country: 'Kenya',        students: 18000  },
-  { id: '566', country: 'Nigeria',      students: 16000  },
-  { id: '364', country: 'Iran',         students: 14000  },
-  { id: '104', country: 'Myanmar',      students: 12000  },
-  { id: '116', country: 'Cambodia',     students: 10000  },
+  { id: '156', country: 'China',        students: 957774, recent: 196957 },
+  { id: '356', country: 'India',        students: 601899, recent: 145012 },
+  { id: '524', country: 'Nepal',        students: 216732, recent: 71177  },
+  { id: '410', country: 'South Korea',  students: 156140, recent: 13991  },
+  { id: '076', country: 'Brazil',       students: 153658, recent: 20567  },
+  { id: '840', country: 'USA',          students: 147459, recent: 7923   },
+  { id: '704', country: 'Vietnam',      students: 145214, recent: 36840  },
+  { id: '458', country: 'Malaysia',     students: 135789, recent: 14808  },
+  { id: '764', country: 'Thailand',     students: 123547, recent: 19472  },
+  { id: '170', country: 'Colombia',     students: 122209, recent: 25813  },
+  { id: '392', country: 'Japan',        students: 115151, recent: 11580  },
+  { id: '360', country: 'Indonesia',    students: 115002, recent: 25409  },
+  { id: '608', country: 'Philippines',  students: 110774, recent: 34825  },
+  { id: '586', country: 'Pakistan',     students: 86734,  recent: 23510  },
+  { id: '158', country: 'Taiwan',       students: 70288,  recent: 11747  },
+  { id: '144', country: 'Sri Lanka',    students: 70140,  recent: 21247  },
+  { id: '050', country: 'Bangladesh',   students: 67216,  recent: 27211  },
+  { id: '276', country: 'Germany',      students: 67127,  recent: 4322   },
+  { id: '826', country: 'UK',           students: 58000,  recent: 3800   },
+  { id: '250', country: 'France',       students: 42000,  recent: 2900   },
+  { id: '124', country: 'Canada',       students: 38000,  recent: 2400   },
+  { id: '484', country: 'Mexico',       students: 32000,  recent: 4100   },
+  { id: '152', country: 'Chile',        students: 28000,  recent: 3050   },
+  { id: '032', country: 'Argentina',    students: 24000,  recent: 2350   },
+  { id: '682', country: 'Saudi Arabia', students: 22000,  recent: 1840   },
+  { id: '404', country: 'Kenya',        students: 18000,  recent: 1450   },
+  { id: '566', country: 'Nigeria',      students: 16000,  recent: 2580   },
+  { id: '364', country: 'Iran',         students: 14000,  recent: 980    },
+  { id: '104', country: 'Myanmar',      students: 12000,  recent: 1820   },
+  { id: '116', country: 'Cambodia',     students: 10000,  recent: 920    },
 ];
-vegaEmbed('#mapWorld', {
-  $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
-  width: 'container', height: 400,
-  projection: { type: 'naturalEarth1' },
-  layer: [
-    {
-      data: {
-        url: 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json',
-        format: { type: 'topojson', feature: 'countries' },
-      },
-      transform: [
-        { lookup: 'id', from: { data: { values: worldStudentData }, key: 'id', fields: ['students','country'] } },
-      ],
-      mark: { type: 'geoshape', stroke: '#1a1a1a', strokeWidth: 0.5 },
-      encoding: {
-        color: {
-          condition: {
-            test: 'datum.students != null',
-            field: 'students', type: 'quantitative',
-            scale: { scheme: 'oranges', domain: [0, 960000] },
-            legend: { title: 'Total Students (2005–2025)', format: ',.0f', orient: 'bottom-right', gradientLength: 160, labelColor: C.ink, titleColor: C.ink },
-          },
-          value: '#2a2a2a',
+
+function renderWorldMap(view) {
+  const valueField  = view === 'recent' ? 'recent' : 'students';
+  const legendTitle = view === 'recent' ? 'Students (2025)' : 'Total Students (2005–2025)';
+  const maxDomain   = view === 'recent' ? 200000 : 960000;
+
+  vegaEmbed('#mapWorld', {
+    $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+    width: 'container', height: 430,
+    background: '#18181b',
+    projection: { type: 'naturalEarth1' },
+    layer: [
+      {
+        data: {
+          url: 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json',
+          format: { type: 'topojson', feature: 'countries' },
         },
-        tooltip: [
-          { field: 'country', title: 'Country' },
-          { field: 'students', title: 'Total Students', format: ',.0f' },
+        transform: [
+          { lookup: 'id', from: { data: { values: worldStudentData }, key: 'id', fields: ['students','recent','country'] } },
         ],
+        mark: { type: 'geoshape', stroke: '#0c0c0d', strokeWidth: 0.5 },
+        encoding: {
+          color: {
+            condition: {
+              test: `datum.${valueField} != null`,
+              field: valueField, type: 'quantitative',
+              scale: { scheme: 'oranges', domain: [0, maxDomain] },
+              legend: {
+                title: legendTitle, format: ',.0f', orient: 'bottom-right',
+                gradientLength: 160, labelColor: C.ink, titleColor: C.ink,
+              },
+            },
+            value: '#262629',
+          },
+          tooltip: [
+            { field: 'country', title: 'Country' },
+            { field: 'students', title: 'Total 2005–2025', format: ',.0f' },
+            { field: 'recent',   title: '2025 only',        format: ',.0f' },
+          ],
+        },
       },
-    },
-  ],
-}, { ...embedOpts, config: { ...embedOpts.config, background: '#1e1e1e', view: { stroke: null } } });
+    ],
+  }, { ...embedOpts, config: { ...embedOpts.config, background: '#18181b', view: { stroke: null } } });
+}
+
+renderWorldMap('cumulative');
+document.querySelectorAll('#worldToggle .tog-btn').forEach(btn => {
+  btn.addEventListener('click', function () {
+    document.querySelectorAll('#worldToggle .tog-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    renderWorldMap(this.dataset.view);
+  });
+});
 
 // ── AUSTRALIA MAP ─────────────────────────────────────────────────
 const ausStudentData = [
@@ -875,7 +919,7 @@ vegaEmbed('#mapAustralia', {
   $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
   width: 'container',
   height: 500,
-  background: '#1e1e1e',
+  background: '#18181b',
   projection: { type: 'mercator' },
   layer: [
     {
@@ -893,26 +937,22 @@ vegaEmbed('#mapAustralia', {
           },
         },
       ],
-      mark: {
-        type: 'geoshape',
-        stroke: '#1e1e1e',
-        strokeWidth: 2,
-      },
+      mark: { type: 'geoshape', stroke: '#0c0c0d', strokeWidth: 2 },
       encoding: {
         color: {
           field: 'students',
           type: 'quantitative',
           scale: {
             domain: [4000, 215000],
-            range: ['#5c2c10', '#8a4416', '#b8591a', '#e8721c', '#f5a623'],
+            range: ['#5c2c10', '#8a4416', '#b8591a', '#ec7a1c', '#f7a64e'],
           },
           legend: {
             title: '2025 Students',
             format: ',.0f',
             orient: 'bottom-right',
             gradientLength: 160,
-            labelColor: '#f0f0f0',
-            titleColor: '#f0f0f0',
+            labelColor: '#f4f4f0',
+            titleColor: '#f4f4f0',
           },
         },
         tooltip: [
