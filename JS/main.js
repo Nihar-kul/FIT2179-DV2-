@@ -524,33 +524,44 @@ vegaEmbed('#chart9', {
   },
 }, embedOpts);
 
-// ── CHART 10 ──────────────────────────────────────────────────────
+// ── CHART 10 (Figure 15) ──────────────────────────────────────────
 const vetVisa = visaRawData.filter(d => d.Sector === 'Vocational Education and Training Sector');
 vegaEmbed('#chart10', {
   $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
-  width: 'container', height: 310,
+  width: 'container', height: 320,
   data: { values: vetVisa },
+  encoding: {
+    x: { field: 'FY', type: 'ordinal', axis: { labelAngle: -40, labelLimit: 90, title: 'Financial Year' } },
+  },
   layer: [
     {
       mark: { type: 'bar', color: C.orange + '44', cornerRadiusTopLeft: 2, cornerRadiusTopRight: 2 },
       encoding: {
-        x: { field: 'FY', type: 'ordinal', axis: { labelAngle: -40, labelLimit: 90, title: 'Financial Year' } },
-        y: { field: 'Lodged', type: 'quantitative', axis: { format: ',.0f', title: 'Visa Lodgements', titleColor: C.orange } },
+        y: {
+          field: 'Lodged', type: 'quantitative',
+          axis: { format: ',.0f', title: 'Visa Lodgements', titleColor: C.orange, orient: 'left', grid: true },
+        },
         tooltip: [{ field: 'FY' }, { field: 'Lodged', format: ',.0f', title: 'Applications' }, { field: 'Rate', title: 'Grant Rate %' }],
       },
     },
     {
       mark: { type: 'line', color: C.red, strokeWidth: 2.5, interpolate: 'monotone' },
       encoding: {
-        x: { field: 'FY', type: 'ordinal' },
-        y: { field: 'Rate', type: 'quantitative', axis: { title: 'Grant Rate (%)', titleColor: C.red, orient: 'right' }, scale: { domain: [50, 100] } },
+        y: {
+          field: 'Rate', type: 'quantitative',
+          scale: { domain: [50, 100] },
+          axis: { title: 'Grant Rate (%)', titleColor: C.red, orient: 'right', grid: false },
+        },
       },
     },
     {
       mark: { type: 'point', filled: true, color: C.red, size: 55 },
       encoding: {
-        x: { field: 'FY', type: 'ordinal' },
-        y: { field: 'Rate', type: 'quantitative', scale: { domain: [50, 100] } },
+        y: {
+          field: 'Rate', type: 'quantitative',
+          scale: { domain: [50, 100] },
+          axis: null,
+        },
       },
     },
   ],
